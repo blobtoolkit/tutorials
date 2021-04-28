@@ -96,3 +96,45 @@ blobtools view --remote ~/blobtoolkit/blobdirs
 ```
 
 And follow the same instructions as above. Go to http://localhost:8001/view/all to see all three datasets.
+
+## Run blobtools to create a BlobDir
+
+Go to a folder where all the intermediate files, i.e. mapping/blast/stats files already exist. Note: this folder is too large to share for downloading, so this part of the demo is only on my screen for now. I will add a smaller example in the future.
+```
+cd /volumes/data/by_accession/GCA_902806685.1
+```
+We'll first see what files already exist:
+```
+ls -al
+```
+
+To run the pipeline, set some BASH environment variable names:
+```
+DATA_DIR=/volumes/data/by_accession/
+SNAKE_DIR=~/blobtoolkit/pipeline
+THREADS=16
+ACCESSION=GCA_902806685.1
+```
+Now run any of the steps in https://github.com/blobtoolkit/pipeline#sub-pipelines
+
+If the steps have already been run, snakemake will report "Nothing to do":
+```
+TOOL=minimap
+snakemake -p \
+          -j $THREADS \
+          --directory $DATA_DIR/$ACCESSION/$TOOL \
+          --configfile $DATA_DIR/$ACCESSION/config.yaml \
+          --latency-wait 60 \
+          --stats $DATA_DIR/$ACCESSION/$TOOL.stats \
+          -s $SNAKE_DIR/$TOOL.smk
+
+TOOL=blobtools
+snakemake -p \
+          -j $THREADS \
+          --directory $DATA_DIR/$ACCESSION/$TOOL \
+          --configfile $DATA_DIR/$ACCESSION/config.yaml \
+          --latency-wait 60 \
+          --stats $DATA_DIR/$ACCESSION/$TOOL.stats \
+          -s $SNAKE_DIR/$TOOL.smk
+```
+
