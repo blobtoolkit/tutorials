@@ -70,7 +70,8 @@ Create a new directory and download a pre-made BlobDir:
 ```
 mkdir -p ~/blobtoolkit/blobdirs
 cd ~/blobtoolkit/blobdirs
-curl ftp://ftp.ed.ac.uk/incoming/CADCXM01.1.tar.gz | tar xzf -
+wget -O CADCXM01.1.tar.gz "https://github.com/blobtoolkit/tutorials/blob/main/CADCXM01.1.tar.gz?raw=true"
+tar xzf CADCXM01.1.tar.gz
 ```
 Run the blobtools view command:
 ```
@@ -89,8 +90,10 @@ Now, download some more BlobDirs:
 ```
 # kill the existing blobtools view command first by pressing Ctrl+c
 cd ~/blobtoolkit/blobdirs
-curl ftp://ftp.ed.ac.uk/incoming/JACYVU01.tar.gz | tar xzf -
-curl ftp://ftp.ed.ac.uk/incoming/CAJEUD01.tar.gz | tar xzf -
+wget -O JACYVU01.tar.gz "https://github.com/blobtoolkit/tutorials/blob/main/JACYVU01.tar.gz?raw=true"
+wget -O CAJEUD01.tar.gz "https://github.com/blobtoolkit/tutorials/blob/main/CAJEUD01.tar.gz?raw=true"
+tar xzf JACYVU01.tar.gz
+tar xzf CAJEUD01.tar.gz
 
 blobtools view --remote ~/blobtoolkit/blobdirs
 ```
