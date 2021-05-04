@@ -99,9 +99,16 @@ And follow the same instructions as above. Go to http://localhost:8001/view/all 
 
 ## Run blobtools to create a BlobDir
 
-Go to a folder where all the intermediate files, i.e. mapping/blast/stats files already exist. Note: this folder is too large to share for downloading, so this part of the demo is only on my screen for now. I will add a smaller example in the future.
+### Set up databases
+Normally you would create / download the full databases using the steps in https://github.com/blobtoolkit/pipeline#databases
+
+For this demo, download these files (~1GB)
 ```
-cd /volumes/data/by_accession/GCA_902806685.1
+cd ~/blobtoolkit
+wget ftp://ftp.ed.ac.uk/incoming/demodatabases.tar.gz
+wget ftp://ftp.ed.ac.uk/incoming/demodata.tar.gz
+tar xzf demodatabases.tar.gz
+tar xzf demodata.tar.gz
 ```
 We'll first see what files already exist:
 ```
@@ -110,10 +117,10 @@ ls -al
 
 To run the pipeline, set some BASH environment variable names:
 ```
-DATA_DIR=/volumes/data/by_accession/
+DATA_DIR=~/blobtoolkit/data/
 SNAKE_DIR=~/blobtoolkit/pipeline
 THREADS=16
-ACCESSION=GCA_902806685.1
+ACCESSION=
 ```
 Now run any of the steps in https://github.com/blobtoolkit/pipeline#sub-pipelines
 
@@ -128,7 +135,16 @@ snakemake -p \
           --stats $DATA_DIR/$ACCESSION/$TOOL.stats \
           -s $SNAKE_DIR/$TOOL.smk
 
-TOOL=blobtools
+TOOL=windowmasker
+snakemake -p \
+          -j $THREADS \
+          --directory $DATA_DIR/$ACCESSION/$TOOL \
+          --configfile $DATA_DIR/$ACCESSION/config.yaml \
+          --latency-wait 60 \
+          --stats $DATA_DIR/$ACCESSION/$TOOL.stats \
+          -s $SNAKE_DIR/$TOOL.smk
+
+TOOL=blobtoolkit
 snakemake -p \
           -j $THREADS \
           --directory $DATA_DIR/$ACCESSION/$TOOL \
