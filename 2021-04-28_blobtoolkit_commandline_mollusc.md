@@ -102,7 +102,7 @@ And follow the same instructions as above. Go to http://localhost:8001/view/all 
 ### Set up databases
 Normally you would create / download the full databases using the steps in https://github.com/blobtoolkit/pipeline#databases
 
-For this demo, download these files (~1GB)
+For this demo, download these files (~4GB)
 ```
 cd ~/blobtoolkit
 wget ftp://ftp.ed.ac.uk/incoming/demodatabases.tar.gz
@@ -120,7 +120,7 @@ To run the pipeline, set some BASH environment variable names:
 DATA_DIR=~/blobtoolkit/data/
 SNAKE_DIR=~/blobtoolkit/pipeline
 THREADS=16
-ACCESSION=
+ACCESSION=GCA_002872375.1
 ```
 Now run any of the steps in https://github.com/blobtoolkit/pipeline#sub-pipelines
 
@@ -153,4 +153,3 @@ snakemake -p \
           --stats $DATA_DIR/$ACCESSION/$TOOL.stats \
           -s $SNAKE_DIR/$TOOL.smk
 ```
-
