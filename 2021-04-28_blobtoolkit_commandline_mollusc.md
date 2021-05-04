@@ -33,10 +33,7 @@ conda install -y -n base -c conda-forge mamba
 Use mamba where you would normally use conda for creating environments and installing packages:
 
 ```
-mamba create -y -n btk_env -c conda-forge -c bioconda -c tolkit \
-    python=3.8 snakemake docopt defusedxml psutil pyyaml tqdm ujson urllib3 \
-    entrez-direct minimap2=2.17 seqtk diamond=2 busco=5 \
-    samtools=1.10 pysam=0.16 mosdepth=0.2.9 tolkein
+mamba env create -f https://raw.githubusercontent.com/blobtoolkit/blobtoolkit-docker/develop/env.yaml
 ```
 Activate this environment:
 ```
@@ -50,10 +47,10 @@ If these are not installable on your local compute environment (e.g. a shared cl
 ```
 sudo apt update && sudo apt-get -y install firefox xvfb
 # apt-get install instruction is only for ubuntu linux. Use the equivalent for other linux distros
+```
 
-conda activate btk_env
-mamba install -y -c conda-forge geckodriver selenium pyvirtualdisplay nodejs=10
-pip install fastjsonschema;
+Now set up the viewer:
+```
 cd ~/blobtoolkit/viewer
 npm install
 ```
