@@ -115,6 +115,8 @@ We'll first see what files already exist:
 ls -al
 ```
 
+Edit `data/config.yaml` file to change locations.
+
 To run the pipeline, set some BASH environment variable names:
 ```
 DATA_DIR=~/blobtoolkit/data/
