@@ -8,7 +8,7 @@ Authors:
 ## BlobToolKit (v3.3.0) installation 
 
 
-BlobToolKit is written in python and is available as a pip install package. If you are used to installing pip packages, you can just run the following command:
+BlobToolKit is available as a pip install package. If you are used to installing pip packages, you can just run the following command:
 ````bash
 pip install blobtoolkit
 ````
@@ -19,7 +19,7 @@ To install conda first, follow the instructions at https://docs.conda.io/en/late
 
 Then run the commands:
 ```
-conda create -n btk pip python=3.8
+conda create -y -n btk pip
 conda activate btk
 pip install blobtoolkit
 ```
