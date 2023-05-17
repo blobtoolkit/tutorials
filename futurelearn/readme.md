@@ -5,12 +5,12 @@ Authors:
 * [Abdoallah Sharaf](https://github.com/abdo3a)
 * [Sujai Kumar](https://github.com/sujaikumar)
 
-## BlobToolKit (v3.3.0) installation 
-
+## BlobToolKit (v4.1.5) installation 
 
 BlobToolKit is available as a pip install package. If you are used to installing pip packages, you can just run the following command:
+
 ````bash
-pip install blobtoolkit
+pip install blobtoolkit[full]
 ````
 
 However, if you have never run pip before, then we recommend using conda to first create a conda environment. Conda environments are easier to keep separate and update and remove without affecting anything else on your computer.
@@ -21,29 +21,51 @@ Then run the commands:
 ```
 conda create -y -n btk pip
 conda activate btk
-pip install blobtoolkit
+pip install blobtoolkit[full]
 ```
 Once the commands finish, you should be able to run the command `blobtools` and see an overview.
 
-The blobtools view command requires firefox or a chromium-based browser to start the interactive viewer or to generate plots from the command line, these can be installed with:
-
-````bash
-conda install -c conda-forge firefox geckodriver
-````
+## Test the installation
 
 Do a test to make sure everything works by typing:
 ```bash
+blobtools
+```
+You should see help text for each of the `blobtools` subcommands.
+
+To test the api server and viewer has also installed correctly, type:
+```bash
 blobtools host _
 ```
-You should see the following message:
+You should see something like the following message:
 ```
 Starting BlobToolKit API on port 8000 (pid: 7837)
 Starting BlobToolKit viewer on port 8080 (pid: 7850)
 Visit http://localhost:8080 to use the interactive BlobToolKit Viewer.
 ```
 
+If you are already running a web service or some other service on ports 8000 and 8080, you will get a message like this:
+```
+ERROR: Port 8000 already in use, unable to host BlobtoolKit API.
+       Use: `lsof -nP -iTCP:8000 | grep LISTEN` to find the associated process.
+       It may take ~30s for this port to become available when restarting BlobtoolKit API.
+```
+If this happens, you can either:
+1. Kill the processes running on port 8000 and port 8080 or
+2. You can use different ports (typically any port above 1024 should be ok) when starting blobtools, eg:
+```
+blobtools host _ --port 8030 --api-port 8031
+```
+
 If you are on a laptop or desktop, open any web browser and type `http://localhost:8080` in the url bar. Type `all` in the Search for Datasets section to see a default BlobToolKit plot that is loaded with the installation.
 
+If you are installing BTK on a remote server, you will need to set up a separate ssh tunnel to the remote server. Open another terminal window and type this:
+```
+ssh -L :8080:127.0.0.1:8080 -L :8000:127.0.0.1:8000 USER@SERVER
+```
+where you would replace `USER@SERVER` with your login credentials for that server. If you had to set up a different `--port` and `--api-port` in your `blobtools host` command above, then put those numbers instead of 8080 and 8000 in this `ssh` command.
+
+What this `ssh` command does is set up a tunnel forwarding port 8080 and 8000 on your local laptop or desktop to port 8080 and 8000 respectively on your remote server. If this command succeeds, you should be able to open any web browser on your local laptop or desktop and type `http://localhost:8080` in the url bar and continue as above.
 
 # Workflow to work on your own genome assembly
 
