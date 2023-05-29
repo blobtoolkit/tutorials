@@ -19,7 +19,7 @@ To install conda first, follow the instructions at https://docs.conda.io/en/late
 
 Then run the commands:
 ```
-conda create -y -n btk pip
+conda create -y -n btk python=3.9
 conda activate btk
 pip install blobtoolkit[full]
 ```
@@ -284,5 +284,3 @@ blobtools filter \
      --fasta assembly.fasta \
      ./btk/
 ````
-
-
